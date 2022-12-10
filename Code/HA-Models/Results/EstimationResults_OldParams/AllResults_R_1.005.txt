@@ -1,0 +1,19 @@
+Results for CRRA = 1.0 and R = 1.005
+
+Education group = 0.00: beta = 0.8572, nabla = 0.1660
+	Median LW/PI-ratio = 4.64
+	Lorenz Points = [0.0, 0.0, 0.5135, 3.5938]
+
+Education group = 1.00: beta = 0.9611, nabla = 0.0442
+	Median LW/PI-ratio = 30.20
+	Lorenz Points = [0.0328, 0.9476, 3.7637, 11.2905]
+
+Education group = 2.00: beta = 0.9942, nabla = 0.0070
+	Median LW/PI-ratio = 112.80
+	Lorenz Points = [0.3059, 1.4588, 3.9633, 9.8798]
+
+Population calculations:
+	Median LW/PI-ratios = [4.64, 30.09, 113.59]
+	Lorenz Points = [0.0345, 0.6188, 2.5749, 8.3936]
+	Wealth shares = [ 1.42128382 20.6206346  77.95808157]
+	Average MPCs (incl. splurge) = [0.8715957504099702, 0.7694551407295347, 0.534252780619269, 0.6895730572079088]
