@@ -18,6 +18,15 @@ from HARK.cstwMPC.SetupParamsCSTW import init_infinite
 # for plotting
 import matplotlib.pyplot as plt
 
+# for output
+cwd             = os.getcwd()
+folders         = cwd.split(os.path.sep)
+top_most_folder = folders[-1]
+if top_most_folder == 'Target_AggMPCX_LiquWealth':
+    Abs_Path = cwd
+else:
+    Abs_Path = cwd + '\\Target_AggMPCX_LiquWealth'
+
 # Set key problem-specific parameters
 TypeCount =  8      # Number of consumer types with heterogeneous discount factors
 AdjFactor = 1.0     # Factor by which to scale all of MPCs in Table 9
@@ -382,7 +391,7 @@ def find_Opt_splurge_beta_nabla():
     guess_splurge_beta_nabla = [0.314,0.983,0.0174]
     
     f_temp = lambda x : FagerengObjFunc(x[0],x[1],x[2],target='AGG_MPC_plus_Liqu_Wealth')
-    opt = minimizeNelderMead(f_temp, guess_splurge_beta_nabla, verbose=True)
+    opt = minimizeNelderMead(f_temp, guess_splurge_beta_nabla, verbose=True,  maxiter=100)
     print('Finished estimating')
     print('Optimal splurge is ' + str(opt[0]) )
     print('Optimal (beta,nabla) is ' + str(opt[1]) + ',' + str(opt[2]))
@@ -391,7 +400,7 @@ def find_Opt_splurge_beta_nabla():
 
 #%%
     
-CRRA_values = [1,2,3]
+CRRA_values = [1,2] #[1,2,3]
 
 for el in range(0,len(CRRA_values)):
     print('Running CRRA = ', CRRA_values[el])
@@ -408,25 +417,23 @@ for el in range(0,len(CRRA_values)):
     res = find_Opt_splurge_beta_nabla()
 
 
-    with open('Result_CRRA_'+str(base_params['CRRA'])+'.0.txt', 'w') as f:
+    with open(Abs_Path+'/Result_CRRA_'+str(base_params['CRRA'])+'.0.txt', 'w') as f:
         str1 = repr(res)
         f.write(str1)
         f.close
     
 
 
- 
 
 
 
+#%% Plot main result with CRRA = 2.0
 
 
+    
+        
 
-
-
-#%% Conduct the estimation for beta, dist and splurge
-
-f = open('Result_CRRA_2.0.txt', 'r')
+f = open(Abs_Path+'\Result_CRRA_2.0.txt', 'r')
 if f.mode=='r':
     contents= f.read()
 dictload= eval(contents)
@@ -452,7 +459,7 @@ plt.legend(['Model','Fagereng, Holm and Natvik (2021)'])
 plt.xticks(np.arange(min(xAxis), max(xAxis)+1, 1.0))
 plt.xlabel('year')
 plt.ylabel('% of lottery win spent')
-plt.savefig('Figures/' +'AggMPC_LotteryWin.pdf')
+plt.savefig(Abs_Path+'/Figures/' +'AggMPC_LotteryWin.pdf')
 plt.show()   
 
 
@@ -472,7 +479,7 @@ plt.scatter(np.array([20,40,60,80,100]),np.hstack([lorenz_target,1]),c='black', 
 plt.xlabel('Income percentile',fontsize=12)
 plt.ylabel('Cumulative liquid wealth share',fontsize=12)
 plt.legend(['Model','Data'])
-plt.savefig('Figures/' +'LiquWealth_Distribution.pdf')
+plt.savefig(Abs_Path+'/Figures/' +'LiquWealth_Distribution.pdf')
 plt.show()  
 
 
@@ -481,16 +488,15 @@ plt.show()
 # Output to Excel:
 x = np.vstack(( xAxis, simulated_MPC_mean_add_Lottery_Bin, Agg_MPCX_target) )
 df = pd.DataFrame(x.T,columns=['Year','Model','Fagereng'])
-df.to_excel('Data_AggMPC_LotteryWin.xlsx')
-
+df.to_excel(Abs_Path+'/Data_AggMPC_LotteryWin.xlsx')
 
 x = np.vstack(( LorenzAxis, Lorenz_Data_Adj ) )
 df = pd.DataFrame(x.T,columns=['Percentile','Model'])
-df.to_excel('LiquWealth_Distribution_a.xlsx')
+df.to_excel(Abs_Path+'/LiquWealth_Distribution_a.xlsx')
 
 x = np.vstack(( np.array([20,40,60,80,100]), np.hstack([lorenz_target,1]) ) )
 df = pd.DataFrame(x.T,columns=['Percentile','Data'])
-df.to_excel('LiquWealth_Distribution_b.xlsx')
+df.to_excel(Abs_Path+'/LiquWealth_Distribution_b.xlsx')
 
 
 

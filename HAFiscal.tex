@@ -2,12 +2,17 @@
 \input{./econtexRoot.texinput} % Set paths (like, \LaTeXInputs) to find resources
 
 % Document has title page and table of contents and header:
-\documentclass[titlepage, headings=optiontotocandhead]{\econtex} % \econtex: see econtexRoot
+\documentclass[titlepage, headings=optiontotocandhead]{\econtex} % \econtex: see ./econtexRoot
 
-% Keyname for paper 
+% Whether or not to include the Appendix and Table of Contents
+% Change {true} to {false} to exclude 
+\provideboolean{Appendix}\setboolean{Appendix}{true}
+\provideboolean{TOC}\setboolean{TOC}{true}
+
+% Keyname for paper (optional)
 \newcommand{\texname}{HAFiscal}
 
-% Can compile either as pdf or web document
+% Can compile either as pdf or web document (optional)
 \providecommand{\versn}{pdf} % Version; like, web or pdf or journal submission
 
 % Standard useful packages for economics
@@ -25,13 +30,15 @@
 \input{\LaTeXInputs/econtex_notinsubfile} % instead are part of a larger document
 
 \subfile{HAFiscal-titlepage}\pagebreak
-\input{HAFiscal-contents.texinput}\pagebreak % Table of contents
+
+% Table of contents
+\ifthenelse{\boolean{TOC}}{\subfile{HAFiscal-contents.texinput}\pagebreak }{}
 \input{Subfiles.texinput} % Paper composed of these subfiles
 
 \pagebreak
 \appendix
 
-\subfile{Subfiles/Appendix}
+\ifthenelse{\boolean{Appendix}}{\subfile{Subfiles/Appendix}\pagebreak }{}
 
 % Make the bibliography
 \input{\LaTeXInputs/bibliography_blend}

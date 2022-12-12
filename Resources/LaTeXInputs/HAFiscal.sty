@@ -3,9 +3,13 @@
 
 \usepackage{footmisc,datetime2,refcount,xr-hyper,hhline,rotating,makecell,subfiles}
 \usepackage{\econark}
+\usepackage{\packages/subfiles}
+
+\provideboolean{showPageHead}
+\setboolean{showPageHead}{false}
 % \usepackage{econtexSetup} sets boolean Web=true if compilation type is dvi
-\ifthenelse{\boolean{Web}}{
-  \setboolean{showPageHead}{false}}{   % 
+\ifthenelse{\boolean{Web}}{}{   % 
+  \setboolean{showPageHead}{true}
   \usepackage{scrlayer-scrpage} % Package for page headers if PDF
   \usepackage{caption} % allow suppression of appendix figures in NoAppendix PDF
 }
@@ -15,10 +19,6 @@
 % subfile or being process as standalone
 \providecommand{\onlyinsubfile}{}\renewcommand{\onlyinsubfile}[1]{#1}
 \providecommand{\notinsubfile}{}\renewcommand{\notinsubfile}[1]{}
-
-% Control whether subsection is displayed at top of page of PDF 
-\newboolean{showPageHead}
-\setboolean{showPageHead}{true}
 
 % Commands unique to paper
 \provideboolean{CDCEdits}\setboolean{CDCEdits}{true}

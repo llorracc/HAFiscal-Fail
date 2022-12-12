@@ -173,10 +173,8 @@
   *{file}   {Subfiles//../Resources/econtexPaths.tex}{0000/00/00 v0.0}
   *{file}   {Subfiles/Model.tex}{0000/00/00 v0.0}
   *{file}   {Subfiles/Parameterization.tex}{0000/00/00 v0.0}
-  *{file}   {Subfiles/./econtexRoot.texinput}{0000/00/00 v0.0}
-  *{file}   {Subfiles//../Resources/econtexPaths.tex}{0000/00/00 v0.0}
-  *{file}   {Subfiles//../Code/HA-Models/Target_AggMPCX_LiquWealth/Figures/AggMPC_LotteryWin.pdf}{0000/00/00 v0.0}
-  *{file}   {Subfiles//../Code/HA-Models/Target_AggMPCX_LiquWealth/Figures/LiquWealth_Distribution.pdf}{0000/00/00 v0.0}
+  *{file}   {./Code/HA-Models/Target_AggMPCX_LiquWealth/Figures/AggMPC_LotteryWin.pdf}{0000/00/00 v0.0}
+  *{file}   {./Code/HA-Models/Target_AggMPCX_LiquWealth/Figures/LiquWealth_Distribution.pdf}{0000/00/00 v0.0}
   *{file}   {Subfiles//../Figures/LorenzPoints.pdf}{0000/00/00 v0.0}
   *{file}   {Subfiles/Comparing-policies.tex}{0000/00/00 v0.0}
   *{file}   {Subfiles/./econtexRoot.texinput}{0000/00/00 v0.0}

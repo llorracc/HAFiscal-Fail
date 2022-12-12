@@ -1,4 +1,17 @@
 def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
+    
+    import os
+    
+    # for output
+    cwd             = os.getcwd()
+    folders         = cwd.split(os.path.sep)
+    top_most_folder = folders[-1]
+    if top_most_folder == 'FromPandemicCode':
+        Abs_Path_Results = "".join([x + "//" for x in folders[0:-1]],)
+        Abs_Path = cwd
+    else:
+        Abs_Path_Results = cwd
+        Abs_Path = cwd + '\\FromPandemicCode'
 
     import numpy as np
     from HARK.distribution import Uniform
@@ -17,8 +30,8 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
     CRRA = 2.0
     Rfree_base = [1.01]
     Rspell = 6            # Expected length of recession, in quarters. If R_shared = True, must be an integer
-    betas_txt_location = '../Results/DiscFacEstim_CRRA_2.0_R_1.01.txt' 
-    Splurge_txt_location = '../Target_AggMPCX_LiquWealth/Result_CRRA_2.0.txt'
+    betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_2.0_R_1.01.txt' 
+    Splurge_txt_location = Abs_Path_Results+'/Target_AggMPCX_LiquWealth/Result_CRRA_2.0.txt'
     IncUnempNoBenefits = 0.5   # Unemployment income when benefits run out (proportion of permanent income)
     ADelasticity = 0.3      
     
@@ -27,22 +40,22 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         ADelasticity = 0.5
     elif Parametrization == 'CRRA1' or Parametrization == 'CRRA1_PVSame':
         CRRA = 1.0
-        betas_txt_location = '../Results/DiscFacEstim_CRRA_1.0_R_1.01.txt' 
-        Splurge_txt_location = '../Target_AggMPCX_LiquWealth/Result_CRRA_1.0.txt'  
+        betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_1.0_R_1.01.txt' 
+        Splurge_txt_location = Abs_Path_Results+'/Target_AggMPCX_LiquWealth/Result_CRRA_1.0.txt'  
     elif Parametrization == 'CRRA3' or Parametrization == 'CRRA3_PVSame':
         CRRA = 3.0
-        betas_txt_location = '../Results/DiscFacEstim_CRRA_3.0_R_1.01.txt'
-        Splurge_txt_location = '../Target_AggMPCX_LiquWealth/Result_CRRA_3.0.txt'  
+        betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_3.0_R_1.01.txt'
+        Splurge_txt_location = Abs_Path_Results+'/Target_AggMPCX_LiquWealth/Result_CRRA_3.0.txt'  
     elif Parametrization == 'Rfree_1005' or Parametrization == 'Rfree_1005_PVSame':
         Rfree_base = [1.005]
-        betas_txt_location = '../Results/DiscFacEstim_CRRA_2.0_R_1.005.txt'  
+        betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_2.0_R_1.005.txt'  
     elif Parametrization == 'Rfree_1015' or Parametrization == 'Rfree_1015_PVSame':
         Rfree_base = [1.015]
-        betas_txt_location = '../Results/DiscFacEstim_CRRA_2.0_R_1.015.txt'
+        betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_2.0_R_1.015.txt'
     elif Parametrization == 'Rspell_4' or Parametrization == 'Rspell_4_PVSame':
         Rspell = 4
     elif Parametrization == 'LowerUBnoB' or Parametrization == 'LowerUBnoB_PVSame':
-        betas_txt_location = '../Results/DiscFacEstim_CRRA_2.0_R_1.01_altBenefits.txt'
+        betas_txt_location = Abs_Path_Results+'/Results/DiscFacEstim_CRRA_2.0_R_1.01_altBenefits.txt'
         IncUnempNoBenefits = 0.15
         IncUnemp = 0.3
     
@@ -67,21 +80,21 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
     
     
     if Parametrization == 'CRRA2_PVSame':
-        figs_dir_FullRun = './Figures/CRRA2/'
+        figs_dir_FullRun = Abs_Path+'/Figures/CRRA2/'
     elif Parametrization == 'ADElas_PVSame':
-        figs_dir_FullRun = './Figures/ADElas/'           
+        figs_dir_FullRun = Abs_Path+'/Figures/ADElas/'           
     elif Parametrization == 'CRRA1_PVSame':
-        figs_dir_FullRun = './Figures/CRRA1/'
+        figs_dir_FullRun = Abs_Path+'/Figures/CRRA1/'
     elif Parametrization == 'CRRA3_PVSame':
-        figs_dir_FullRun = './Figures/CRRA3/'
+        figs_dir_FullRun = Abs_Path+'/Figures/CRRA3/'
     elif Parametrization == 'Rfree_1005_PVSame':
-        figs_dir_FullRun = './Figures/Rfree_1005/'
+        figs_dir_FullRun = Abs_Path+'/Figures/Rfree_1005/'
     elif Parametrization == 'Rfree_1015_PVSame':
-        figs_dir_FullRun = './Figures/Rfree_1015/'
+        figs_dir_FullRun = Abs_Path+'/Figures/Rfree_1015/'
     elif Parametrization == 'Rspell_4_PVSame':
-        figs_dir_FullRun = './Figures/Rspell_4/'
+        figs_dir_FullRun = Abs_Path+'/Figures/Rspell_4/'
     elif Parametrization == 'LowerUBnoB_PVSame':
-        figs_dir_FullRun = './Figures/LowerUBnoB/'
+        figs_dir_FullRun = Abs_Path+'/Figures/LowerUBnoB/'
 
 
         
